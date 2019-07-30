@@ -2,16 +2,23 @@
   <div id="app">
     <h4 class="bg-primary text-white text-center p-2">{{name}}'s To Do List</h4>
     <div class="container-fluid p-4">
-      <div class="row">
-        <div class="col font-weight-bold">Task</div>
-        <div class="col-2 font-weight-bold">Done</div>
-      </div>
-      <div class="row" v-for="t in filteredTasks" v-bind:key="t.action">
-        <div class="col">{{t.action}}</div>
-        <div class="col-2 text-center">
-          <input type="checkbox" v-model="t.done" class="form-check-input" />
+      <div class="row" v-if="filteredTasks.length == 0">
+        <div class="col text-center">
+          <b>Nothing to do. Hurrah!</b>
         </div>
       </div>
+      <template v-else>
+        <div class="row">
+          <div class="col font-weight-bold">Task</div>
+          <div class="col-2 font-weight-bold">Done</div>
+        </div>
+        <div class="row" v-for="t in filteredTasks" v-bind:key="t.action">
+          <div class="col">{{t.action}}</div>
+          <div class="col-2 text-center">
+            <input type="checkbox" v-model="t.done" class="form-check-input" />
+          </div>
+        </div>
+      </template>
       <div class="row py-2">
         <div class="col">
           <input v-model="newItemText" class="form-control" />
